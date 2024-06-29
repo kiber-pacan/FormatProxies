@@ -1,3 +1,5 @@
+import os
+
 # Basic color printer
 def log(hex_str, msg):
     hex_str = hex_str[1:]
@@ -39,7 +41,6 @@ def main():
                    "\n5) HTTPS"
         )
     i = int(input())
-
     try:
         proxy = proxies[i - 1]
     except IndexError:
@@ -48,9 +49,18 @@ def main():
     else:
         log("#0be616", "Proxy: " + proxy)
 
+    # Formatting and writing into file
     out = open(proxy + ".txt", "w")
     for x in f:
         line = proxy + " " + x.strip() + ";" + "\n"
         out.write(line)
+    out.close()
+    f.close()
+
+    # Remove last ; character
+    b = open(proxy + ".txt", "ab")
+    b.seek(-2, 2)
+    b.truncate()
+
 
 main()
