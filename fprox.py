@@ -49,8 +49,10 @@ def main():
     else:
         log("#0be616", "Proxy: " + proxy + "\033[0m")
 
+    new = path.replace(".txt", "") + "_patched.txt"
+
     # Formatting and writing into file
-    out = open(proxy + ".txt", "w")
+    out = open(new, "w")
     for x in f:
         line = proxy + " " + x.strip() + ";" + "\n"
         out.write(line)
@@ -58,7 +60,7 @@ def main():
     f.close()
 
     # Remove last ; character
-    b = open(proxy + ".txt", "ab")
+    b = open(new, "ab")
     b.seek(-2, 2)
     b.truncate()
 
